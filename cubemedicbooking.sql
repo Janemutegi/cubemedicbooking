@@ -1,4 +1,4 @@
--- Building a Complete cCube Medic Database Management System
+-- Building a Complete Cube Medic Database Management System
 
 -- Create database
 CREATE DATABASE IF NOT EXISTS CUBE-MEDIC-BOOKING;
