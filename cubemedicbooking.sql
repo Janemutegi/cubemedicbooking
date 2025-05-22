@@ -1,49 +1,25 @@
--- Create database
-CREATE DATABASE IF NOT EXISTS hotel;
-USE hotel;
+-- Building a Complete cCube Medic Database Management System
 
--- guest table
-CREATE TABLE guest(
-guest_id INT PRIMARY KEY AUTO_INCREMENT,
+-- Create database
+CREATE DATABASE IF NOT EXISTS CUBE-MEDIC-BOOKING;
+USE CUBE-MEDIC-BOOKING;
+
+-- patients table
+CREATE TABLE patients(
+patient_id INT PRIMARY KEY AUTO_INCREMENT,
 first_name VARCHAR(50) NOT NULL,
 last_name VARCHAR(50) NOT NULL,
 phone_number VARCHAR(50)
 );
 
--- payment table 
-CREATE TABLE payment_status(
-payment_id INT PRIMARY KEY AUTO_INCREMENT,
-payment_status_name VARCHAR(20) DEFAULT "NOT PAID"
-);
-
--- booking table
-CREATE TABLE IF NOT EXISTS booking(
-booking_id INT PRIMARY KEY AUTO_INCREMENT,
-guest_id INT,
-payment_status_id INT,
-checkin_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-checkout_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-num_adults INT,
-num_children INT,
-booking_amount DECIMAL(10,2) CHECK(booking_amount>0),
-FOREIGN KEY(guest_id) REFERENCES guest(guest_id),
-FOREIGN KEY(payment_status_id) REFERENCES payment_status(payment_id)
-);
-
--- addon table
-CREATE TABLE addon(
-addon_id INT PRIMARY KEY AUTO_INCREMENT,
-addon_name VARCHAR(100) NOT NULL,
+-- pharmacy table
+CREATE TABLE pharmacy(
+pharmacy_id INT PRIMARY KEY AUTO_INCREMENT,
+pharmacy_name VARCHAR(100) NOT NULL,
 price DECIMAL(10,2)
 );
 
--- booking_addon table
-CREATE TABLE booking_addon(
-booking_id INT NOT NULL,
-addon_id INT NOT NULL,
-FOREIGN KEY(booking_id) REFERENCES booking(booking_id),
-FOREIGN KEY(addon_id) REFERENCES addon(addon_id) 
-);
+
 
 -- bed_type table
 CREATE TABLE bed_type(
@@ -107,6 +83,28 @@ FOREIGN KEY (room_class_id) REFERENCES room_class(room_class_id),
 FOREIGN KEY (floor_id) REFERENCES floor(floor_id)
 );
 
+
+
+
+-- payment table 
+CREATE TABLE payment_status(
+payment_id INT PRIMARY KEY AUTO_INCREMENT,
+payment_status_name VARCHAR(20) DEFAULT "NOT PAID"
+);
+
+-- booking table
+CREATE TABLE IF NOT EXISTS booking(
+booking_id INT PRIMARY KEY AUTO_INCREMENT,
+patient_id INT,
+payment_status_id INT,
+checkin_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+checkout_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+num_adults INT,
+num_children INT,
+booking_amount DECIMAL(10,2) CHECK(booking_amount>0),
+FOREIGN KEY(patient_id) REFERENCES patients(patient_id),
+FOREIGN KEY(payment_status_id) REFERENCES payment_status(payment_id)
+);
 -- booking_room table 
 CREATE TABLE booking_room(
 booking_id INT,
@@ -115,9 +113,13 @@ FOREIGN KEY (booking_id) REFERENCES booking(booking_id),
 FOREIGN KEY (room_id) REFERENCES room(room_id)
 );
 
-
-
-
+-- booking_pharmacy table
+CREATE TABLE booking_pharmacy(
+booking_id INT NOT NULL,
+pharmacy_id_id INT NOT NULL,
+FOREIGN KEY(booking_id) REFERENCES booking(booking_id),
+FOREIGN KEY(pharmacy_id) REFERENCES pharmacy(pharmacy_id) 
+);
 
 
 

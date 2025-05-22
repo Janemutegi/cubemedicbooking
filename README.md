@@ -1,6 +1,15 @@
-## Hotel Booking Database 
-KJDFKJDJKJG
+## Cube Medic Booking Database 
+CUBE MEDIC BOOKING DATABASE
 
 ### ERD Diagram
 
-![HOTEL](https://github.com/user-attachments/assets/4d35f878-512a-4853-8897-41b12be0e8af)
+## Database Schema
+![Database ERD](./database-erd.png)
+
+### Tables Overview
+- **Users**: Store patients information
+- **Bookings**: Track customer appointment and consultation bookings
+- **Rooms**: Admission rooms catalog
+
+*Source: [database-erd.drawio](./database-erd.drawio)*
+
